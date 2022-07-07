@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.movie.mapper.MovieMapper">
+ 	<select id="selectAllMovie" resultType="org.movie.domain.MovieVO">
+ 		<![CDATA[
+ 			SELECT * FROM MOVIE ORDER BY CODE DESC
+ 		]]>
+ 	</select>
+ 	
+ 	<insert id="insertMovie">
+ 		<selectKey keyProperty="code" order="BEFORE" resultType="Long">
+ 			select seq_movie.nextval from dual
+ 		</selectKey>
+ 		insert into movie values(#{code}, #{title}, #{price}, #{director}, #{actor}, #{synopsis})
+ 	</insert>
+ 	
+ 	<select id="selectProductByCode" resultType="org.movie.domain.MovieVO">
+ 		SELECT * from MOIVE WHERE CODE=#{code}
+ 	</select>
+ 	
+ 	<delete id="deleteMovie">
+ 		delete from movie where code=#{code} 
+ 	</delete>
+ 
+</mapper>
